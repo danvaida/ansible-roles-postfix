@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-cd /role/ansible
+cd /role/tests
 
 ansible-playbook -i inventory test_defaults.yml test.yml
 

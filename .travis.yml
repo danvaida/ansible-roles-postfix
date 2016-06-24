@@ -1,15 +1,10 @@
 ---
-sudo: required
 dist: jessie
 language: generic
 
-matrix:
-  include:
-    - env: DEBIAN_FRONTEND=noninteractive 
+services:
+  - docker
 
 before_install:
-  - sudo apt-get -y update
-  - sudo apt-get -y install --fix-missing
-  - sudo apt-get -y install gcc libffi-dev libssl-dev python python-dev python-yaml python-pip
-  - sudo pip install --upgrade cffi
-  - sudo pip install ansible
+  - docker build -t ansible-roles-test tests/support
+  - docker run -it -v $PWD:/role ansible-roles-test

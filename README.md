@@ -41,12 +41,10 @@ None.
 
 ## Testing
 
-The testing is accomplished using the new [ansible-container](https://github.com/ansible/ansible-container) tool.
-
 If you want to run the tests on the provided docker environment, run the following commands:
 
 ```bash
 $ cd /path/to/ansible-roles-postfix
-$ ansible-container build
-$ ansible-container run
+$ docker build -t ansible-roles-test tests/support
+$ docker run -it -v $PWD:/role ansible-roles-test
 ```
