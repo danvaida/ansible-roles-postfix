@@ -1,6 +1,5 @@
 ---
 dist: jessie
-language: generic
 
 services:
   - docker
