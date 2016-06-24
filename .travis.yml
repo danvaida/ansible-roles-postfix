@@ -1,0 +1,16 @@
+---
+sudo: required
+dist: jessie
+language: generic
+
+matrix:
+  include:
+    - env: DEBIAN_FRONTEND=noninteractive 
+
+before_install:
+  - sudo apt-get -y update
+  - sudo apt-get -y install --fix-missing
+  - sudo apt-get -y install gcc libffi-dev libssl-dev python python-dev python-yaml python-pip
+  - sudo apt-get -y --purge remove python-cffi
+  - sudo pip install --upgrade cffi
+  - sudo pip install ansible
