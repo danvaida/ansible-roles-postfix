@@ -19,5 +19,5 @@ RUN apt-get -f -y --auto-remove remove \
 RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/* /tmp/*
 
-ADD run-tests.sh run-tests.sh
+COPY run-tests.sh run-tests.sh
 CMD ["./run-tests.sh"]
