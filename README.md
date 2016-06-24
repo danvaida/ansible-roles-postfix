@@ -2,6 +2,8 @@
 
 Installation and configuration of Postfix MTA.
 
+[![Build Status](https://travis-ci.org/danvaida/ansible-roles-postfix.svg?branch=ansible-container)](https://travis-ci.org/danvaida/ansible-roles-postfix)
+
 ## Requirements
 
 None.
