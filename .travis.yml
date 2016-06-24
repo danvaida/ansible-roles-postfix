@@ -5,3 +5,9 @@ services:
 install:
   - docker build -t ansible-roles-test tests/support
   - docker run -it -v $PWD:/role ansible-roles-test
+
+before_script:
+  - docker images
+
+script:
+  - docker ps -a
