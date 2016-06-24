@@ -2,6 +2,7 @@ galaxy_info:
   author: Dan Vaida
   description: Postfix
   issue_tracker_url: https://github.com/danvaida/ansible-roles-postfix/issues
+  license: BSD
   min_ansible_version: 1.9.4
 
   platforms:
@@ -9,3 +10,11 @@ galaxy_info:
       versions:
         - wheezy
         - jessie
+
+  galaxy_tags:
+    - MTA
+    - postfix
+    - mail
+    - system
+
+dependencies: []
