@@ -1,0 +1,29 @@
+---
+- hosts: localhost
+  connection: local
+  roles:
+    - role: ../../
+      postfix_config_templates:
+        - src: './templates/dummy.cf.j2'
+          dest: '/etc/postfix/dummy.cf'
+        - src: './templates/virtual.j2'
+          dest: '/etc/postfix/virtual'
+      postfix_postmap_files:
+        - virtual
+
+  tasks:
+    - stat:
+        path: '/etc/postfix/dummy.cf'
+      register: dummy_config_template
+
+    - command: 'file /etc/postfix/virtual.db'
+      changed_when: False
+      register: virtual_postmapped
+
+    - name: config templates should be present
+      assert:
+        that: dummy_config_template.stat.exists
+
+    - name: postmapped file should be hashed
+      assert:
+        that: "'Hash' in virtual_postmapped.stdout"

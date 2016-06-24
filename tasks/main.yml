@@ -1,0 +1,64 @@
+---
+- name: exim4 and sendmail MTAs should be removed
+  apt:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+    - exim4
+    - sendmail
+  tags:
+    - postfix
+    - package
+
+- name: postfix should be installed
+  apt:
+    name: postfix
+    state: present
+    update_cache: True
+    cache_valid_time: 3600
+  tags:
+    - postfix
+    - package
+
+- name: mailname file should be present
+  template:
+    src: 'mailname.j2'
+    dest: '/etc/mailname'
+    owner: root
+    group: root
+    mode: 0644
+  tags:
+    - postfix
+    - config
+
+- name: User-provided configuration templates should be present
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ item.owner | default('root') }}"
+    group: "{{ item.group | default('root') }}"
+    mode: "{{ item.mode | default('0644') }}"
+  with_items: "{{ postfix_config_templates | default([]) }}"
+  register: _postfix_config_templates
+  notify: restart postfix
+  tags:
+    - postfix
+    - config
+
+- name: postmap should be ran
+  shell: "postmap hash:/etc/postfix/{{ item }}"
+  when: _postfix_config_templates.changed
+  with_items: "{{ postfix_postmap_files | default([]) }}"
+  tags:
+    - postfix
+    - config
+
+- name: postmapped files permissions should be updated
+  file:
+    path: "/etc/postfix/{{ item }}.db"
+    mode: '0600'
+  when: _postfix_config_templates.changed
+  with_items: "{{ postfix_postmap_files | default([]) }}"
+  tags:
+    - postfix
+    - config

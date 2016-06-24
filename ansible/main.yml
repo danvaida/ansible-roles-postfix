@@ -1,0 +1,23 @@
+---
+- hosts: tests_support
+  gather_facts: False
+  tasks:
+    - raw:
+        'which python || apt-get update'
+    - raw:
+        '(which python && which aptitude) || \
+         apt-get install -y python python-apt'
+
+- hosts: tests_support
+  gather_facts: False
+  tasks:
+    - apt:
+        name: "{{ item }}"
+        update_cache: True
+        cache_valid_time: 3600
+      with_items:
+        - 'python-pip'
+        - 'python-dev'
+        - 'libffi-dev'
+    - pip:
+        name: ansible

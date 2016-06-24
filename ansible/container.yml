@@ -1,0 +1,8 @@
+---
+version: '1'
+services:
+  tests_support:
+    image: 'debian:wheezy'
+    command: ['/bin/bash', '/role/ansible/run-tests.sh']
+    volumes:
+      - '$PWD:/role'

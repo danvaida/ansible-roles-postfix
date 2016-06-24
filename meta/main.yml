@@ -1,0 +1,11 @@
+galaxy_info:
+  author: Dan Vaida
+  description: Postfix
+  issue_tracker_url: https://github.com/danvaida/ansible-roles-postfix/issues
+  min_ansible_version: 1.9.4
+
+  platforms:
+    - name: Debian
+      versions:
+        - wheezy
+        - jessie
