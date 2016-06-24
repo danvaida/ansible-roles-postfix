@@ -1,9 +1,7 @@
 ---
-dist: jessie
-
 services:
   - docker
 
-before_install:
+install:
   - docker build -t ansible-roles-test tests/support
   - docker run -it -v $PWD:/role ansible-roles-test
