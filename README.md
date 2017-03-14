@@ -1,8 +1,9 @@
+[![Build Status](https://travis-ci.org/danvaida/ansible-roles-postfix.svg?branch=master)](https://travis-ci.org/danvaida/ansible-roles-postfix)
+[![Galaxy](https://img.shields.io/ansible/role/10539.svg)](https://galaxy.ansible.com/danvaida/postfix/)
+
 # Ansible Postfix role
 
 Installation and configuration of Postfix MTA.
-
-[![Build Status](https://travis-ci.org/danvaida/ansible-roles-postfix.svg?branch=master)](https://travis-ci.org/danvaida/ansible-roles-postfix)
 
 ## Requirements
 
@@ -50,3 +51,7 @@ $ cd /path/to/ansible-roles-postfix
 $ docker build -t ansible-roles-test tests/support
 $ docker run -it -v $PWD:/role ansible-roles-test
 ```
+
+On OSX, you might need to change the python path env var, so that the pip installed packages are preferred:
+
+    $ export PYTHONPATH="/Library/Python/2.7/site-packages:$PYTHONPATH"
